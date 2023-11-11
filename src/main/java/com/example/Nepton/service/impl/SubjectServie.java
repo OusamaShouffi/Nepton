@@ -16,4 +16,27 @@ public class SubjectServie implements com.example.Nepton.service.SubjectService{
         Subject newSubject = subjectRepository.save(subject.toEntity());
         return newSubject.getId();
     }
+
+    @Override
+    public Long updateSubject(SubjectVO subject, Long ID) {
+        Subject subject1 = subjectRepository.findById(ID).get();
+        subject1.setName(subject.getName());
+        subject1.setScore(subject.getScore());
+        subject1.setTeacher(subject.getTeacher());
+        subject1.setSemester(subject.getSemester());
+        subjectRepository.save(subject1);
+        return subject1.getId();
+    }
+
+    @Override
+    public Long deleteSubject(Long ID) {
+        subjectRepository.deleteById(ID);
+        return ID;
+    }
+
+    @Override
+    public Subject selectSubject(Long ID) {
+        return subjectRepository.findById(ID).get();
+    }
+
 }
